@@ -5,14 +5,28 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:h="http://java.sun.com/jsf/html">
 
-    <h:head>
-        <title>PrimeFaces Test</title>
-    </h:head>
-    <h:body>
-
-        <h1>#{testView.testString}</h1>
-
-        <h1>#{testViewCdi.testString}</h1>
-
-    </h:body>
+<h:head>
+    <title>PrimeFaces Test</title>
+</h:head>
+<h:body>
+    <h:form id="form">
+        <p:tree value="#{treeSelectionView.root}" var="doc"
+                selectionMode="checkbox" dynamic="true"
+                selection="#{treeSelectionView.selectedNodes}">
+            <p:treeNode icon="pi pi-paperclip">
+                <h:outputText value="#{doc.name}"/>
+            </p:treeNode>
+            <p:treeNode type="document" icon="pi pi-file">
+                <h:outputText value="#{doc.name}" />
+            </p:treeNode>
+            <p:treeNode type="picture" icon="pi pi-image">
+                <h:outputText value="#{doc.name}" />
+            </p:treeNode>
+            <p:treeNode type="mp3" icon="pi pi-video">
+                <h:outputText value="#{doc.name}" />
+            </p:treeNode>
+            <p:ajax event="select" listener="#{treeSelectionView.onNodeSelect}" update="form" />
+        </p:tree>
+    </h:form>
+</h:body>
 </html>
