@@ -5,14 +5,32 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:h="http://java.sun.com/jsf/html">
 
-    <h:head>
-        <title>PrimeFaces Test</title>
-    </h:head>
-    <h:body>
+<h:head>
+    <title>PrimeFaces Test</title>
+</h:head>
+<h:body>
+    <h:form>
+        <h:panelGrid columns="2" cellpadding="5">
+            <h:outputLabel for="grouped" value="Multiple:" />
+            <p:selectCheckboxMenu id="grouped" value="#{checkboxView.selectedCars}" label="Cars" multiple="true"
+                                  filter="true" filterMatchMode="startsWith" panelStyle="width:250px">
+                <f:selectItems value="#{checkboxView.cars}" />
+            </p:selectCheckboxMenu>
+        </h:panelGrid>
 
-        <h1>#{testView.testString}</h1>
+        <p:commandButton value="Submit" update="displayItems" oncomplete="PF('itemDialog').show()" style="margin-top:10px;" />
+        <p:commandButton value="Disable german cars" action="#{checkboxView.disableGermanCars()}" update="grouped"/>
 
-        <h1>#{testViewCdi.testString}</h1>
-
-    </h:body>
+        <p:dialog header="Selected Items" modal="true" showEffect="fade" hideEffect="fade" widgetVar="itemDialog" width="250">
+            <p:outputPanel id="displayItems">
+                <p:dataList value="#{checkboxView.selectedCars}" var="car" emptyMessage="No cars selected">
+                    <f:facet name="header">
+                        Grouped
+                    </f:facet>
+                    #{car}
+                </p:dataList>
+            </p:outputPanel>
+        </p:dialog>
+    </h:form>
+</h:body>
 </html>
