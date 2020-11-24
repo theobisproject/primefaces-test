@@ -5,16 +5,16 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:h="http://java.sun.com/jsf/html">
 
-    <h:head>
-        <title>PrimeFaces Test</title>
-        <h:outputScript name="test.js" />
-    </h:head>
-    <h:body>
+<h:head>
+    <title>PrimeFaces Test</title>
+    <h:outputScript name="test.js" />
+</h:head>
+<h:body>
 
-        <h1>#{testView.testString}</h1>
-        <h:form id="frmTest">
-            
-        </h:form>
+    <h1>Close Browser or press F5 to log something</h1>
+    <h:form id="remoteCommandForm">
+        <p:remoteCommand id="loggingCommand" name="loggingCommand" action="#{loggingBean.logMessageOnBrowserClose}"/>
+    </h:form>
 
-    </h:body>
+</h:body>
 </html>
